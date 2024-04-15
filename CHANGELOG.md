@@ -1,3 +1,12 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Initialize version
+
+## 0.0.2
+
+* Update readme.md
+
+## 0.0.3
+
+* Update changelog.md
+
