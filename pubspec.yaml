@@ -1,6 +1,6 @@
 name: binary_map_file
 description: "Performant key-value serialization file based in pure Dart, secured support"
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/annotium/binary_map_file
 
 environment:

@@ -11,18 +11,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:crypto/crypto.dart';
 
-typedef _QFile = File;
-typedef _QMessageCodec = StandardMessageCodec;
-
 class BinaryMapFile {
   final bool secured;
   final String path;
-  final _QMessageCodec _codec;
-  final _QFile _file;
+  final StandardMessageCodec _codec;
+  final File _file;
   final Map<String, dynamic> _map;
 
   BinaryMapFile(this._file, {this.secured = false})
-      : _codec = const _QMessageCodec(),
+      : _codec = const StandardMessageCodec(),
         path = _file.path,
         _map = {};
 
