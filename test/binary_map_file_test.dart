@@ -72,5 +72,24 @@ void main() {
       // we can assert the exact output hash if you know it, or just ensure it's different from 'key'.
       expect(encodedKey, isNot('key'));
     });
+
+    test('containsKey should work successfully', () async {
+      when(() => mockFile.existsSync()).thenReturn(true);
+
+      final testMap = {'key': 'value', 'other_key': 1, 'null_value': null};
+
+      const codec = StandardMessageCodec();
+      final byteData = codec.encodeMessage(testMap)!;
+      final bytes = byteData.buffer.asUint8List(0, byteData.lengthInBytes);
+
+      when(() => mockFile.readAsBytes()).thenAnswer((_) async => bytes);
+
+      await binaryMapFile.ensureInitialized();
+
+      expect(binaryMapFile.containsKey('key'), isTrue);
+      expect(binaryMapFile.containsKey('other_key'), isTrue);
+      expect(binaryMapFile.containsKey('null_value'), isTrue);
+      expect(binaryMapFile.containsKey('not_exist'), isFalse);
+    });
   });
 }
