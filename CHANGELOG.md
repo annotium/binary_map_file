@@ -12,5 +12,5 @@
 
 ## 0.0.4
 
-* Refactoring
+* Refactoring/bug fix
 
