@@ -10,3 +10,7 @@
 
 * Update changelog.md
 
+## 0.0.4
+
+* Refactoring
+

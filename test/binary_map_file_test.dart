@@ -1,19 +1,21 @@
 // Copyright NgocKhanh 2024
 
+import 'dart:io';
+
 import 'package:binary_map_file/binary_map_file.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Create mocks
-class MockQFile extends Mock implements QFile {}
+class MockQFile extends Mock implements File {}
 
-class MockQMessageCodec extends Mock implements QMessageCodec {}
+class MockQMessageCodec extends Mock implements StandardMessageCodec {}
 
 void main() {
   group('BinaryMapFile', () {
     late MockQFile mockFile;
     late BinaryMapFile binaryMapFile;
-    ;
 
     setUp(() {
       mockFile = MockQFile();
@@ -27,7 +29,7 @@ void main() {
 
       final testMap = {'key': 'value', 'other_key': 1, 'null_value': null};
 
-      const codec = QMessageCodec();
+      const codec = StandardMessageCodec();
       final byteData = codec.encodeMessage(testMap)!;
       final bytes = byteData.buffer.asUint8List(0, byteData.lengthInBytes);
 

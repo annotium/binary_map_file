@@ -1,22 +1,28 @@
 // Copyright NgocKhanh 2024
 
+library binary_map_file;
+
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
-import 'package:binary_map_file/source/type.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:crypto/crypto.dart';
+
+typedef _QFile = File;
+typedef _QMessageCodec = StandardMessageCodec;
 
 class BinaryMapFile {
   final bool secured;
   final String path;
-  final QMessageCodec _codec;
-  final QFile _file;
+  final _QMessageCodec _codec;
+  final _QFile _file;
   final Map<String, dynamic> _map;
 
   BinaryMapFile(this._file, {this.secured = false})
-      : _codec = const QMessageCodec(),
+      : _codec = const _QMessageCodec(),
         path = _file.path,
         _map = {};
 
