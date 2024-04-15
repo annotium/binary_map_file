@@ -1,6 +1,6 @@
 # BinaryMapFile
 
-Performant key-value store using file system in pure Dart.
+Performant key-value store using file system in pure Dart, secured support.
 
 ---
 
