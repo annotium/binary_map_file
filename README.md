@@ -17,25 +17,33 @@ final binaryMapFile = BinaryMapFile(file, secured: false);
 await binaryMapFile.ensureInitialized();
 // if you want a secured serialization, set the flag secured to `true`
 
+final map = binaryMapFile.map;
+
 ```
 ### Get value 
 
 Get the bool value for key `firstRun`, if the key is not set or null, then reset the value in map to `default value` and return gotten value
 ```dart
-final firstRun = getDefaultValue<bool>('firstRun' , true); //  
+final firstRun = binaryMapFile.getDefaultValue<bool>('firstRun' , true); //  
 // or 
-final value = getValue<bool>('firstRun'); // boolean or null
+final value = binaryMapFile.getValue<bool>('firstRun'); // boolean or null
 ```
 
 ### Set value
 ```dart 
-setValue<bool>('firstRun', false);
+binaryMapFile.setValue<bool>('firstRun', false);
 ```
+
+### Check containing key
+```dart 
+final existed = binaryMapFile.containsKey('firstRun');
+```
+
 
 ### Serialize
 Save the current map to file
 ```dart
-await serialize();
+await binaryMapFile.serialize();
 ```
 
 ## Supported data types

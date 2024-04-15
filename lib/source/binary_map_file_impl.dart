@@ -67,8 +67,7 @@ class BinaryMapFile {
   /// Check if key is set
   ///
   /// * `key` key to lookup
-  bool containsKey<T extends Object>(String key) =>
-      _map.containsKey(hashKey(key));
+  bool containsKey(String key) => _map.containsKey(hashKey(key));
 
   /// Get value for given key, if key is not set, set default value
   ///
