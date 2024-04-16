@@ -22,3 +22,7 @@
 
 * Update example and documentation
 
+## 1.0.0
+
+* Release stable and update documentation
+

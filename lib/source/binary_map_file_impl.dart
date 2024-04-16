@@ -8,9 +8,19 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:crypto/crypto.dart';
 
+/// [BinaryMapFile] is used to file based key-value serialization
+///
+/// Supported messages are acyclic values of these forms:
+///
+///  * null
+///  * [bool]s
+///  * [num]s
+///  * [String]s
+///  * [Uint8List]s, [Int32List]s, [Int64List]s, [Float64List]s
+///  * [List]s of supported values
+///  * [Map]s from supported values to supported values
 class BinaryMapFile {
   final bool secured;
   final String path;
@@ -18,11 +28,16 @@ class BinaryMapFile {
   final File _file;
   final Map<String, dynamic> _map;
 
+  /// Creates a [BinaryMapFile].
+  ///
+  /// * `_file` file system,
+  /// * `secured` secure serialization or not, default is `false`
   BinaryMapFile(this._file, {this.secured = false})
       : _codec = const StandardMessageCodec(),
         path = _file.path,
         _map = {};
 
+  /// Return the internal map
   Map<String, dynamic> get map => _map;
 
   /// Ensure initialize before using
@@ -92,6 +107,8 @@ class BinaryMapFile {
     _map[rawKey] = value;
   }
 
+  /// Save data to file
+  ///
   Future<void> serialize() async {
     debugPrint('Serialize file `$path`');
     try {
@@ -112,6 +129,10 @@ class BinaryMapFile {
   }
 
   @visibleForTesting
+
+  /// Hash the key before lookup or serialize, works only if `secured` is set to true
+  ///
+  /// * `key` key to hash
   String hashKey(String key) =>
       secured ? md5.convert(utf8.encode(key)).toString() : key;
 }

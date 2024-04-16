@@ -53,12 +53,12 @@ Support all data types which [MessageCodec](https://api.flutter.dev/flutter/serv
 Supported messages are acyclic values of these forms:
 
  * null
- * [bool]s
- * [num]s
- * [String]s
- * [Uint8List]s, [Int32List]s, [Int64List]s, [Float64List]s
- * [List]s of supported values
- * [Map]s from supported values to supported values
+ * [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)s
+ * [num](https://api.flutter.dev/flutter/dart-core/num-class.html)s
+ * [String](https://api.flutter.dev/flutter/dart-core/String-class.html)s
+ * [Uint8List](https://api.flutter.dev/flutter/dart-typed_data/Uint8List-class.html)s, [Int32List](https://api.flutter.dev/flutter/dart-typed_data/Int32List-class.html)s, [Int64List](https://api.flutter.dev/flutter/dart-typed_data/Int64List-class.html)s, [Float64List](https://api.flutter.dev/flutter/dart-typed_data/Float64List-class.html)s
+ * [List](https://api.flutter.dev/flutter/dart-core/List-class.html)s of supported values
+ * [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)s from supported values to supported values
 
 ## License
 
