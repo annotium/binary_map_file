@@ -18,3 +18,7 @@
 
 * Refactoring
 
+## 0.0.6
+
+* Update example and documentation
+
