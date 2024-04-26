@@ -23,18 +23,18 @@ import 'package:crypto/crypto.dart';
 ///  * [Map]s from supported values to supported values
 class BinaryMapFile {
   final bool secured;
-  final String path;
   final StandardMessageCodec _codec;
-  final File _file;
   final Map<String, dynamic> _map;
+  final String path;
+  File? _file;
 
-  /// Creates a [BinaryMapFile].
+  /// Creates a [BinaryMapFile] in memory. It will be serialized to file later
+  /// when calling [serialize]
   ///
-  /// * `_file` file system,
   /// * `secured` secure serialization or not, default is `false`
-  BinaryMapFile(this._file, {this.secured = false})
-      : _codec = const StandardMessageCodec(),
-        path = _file.path,
+  BinaryMapFile({required this.path, this.secured = false})
+      : assert(path.isNotEmpty, "Input path must be a valid file path"),
+        _codec = const StandardMessageCodec(),
         _map = {};
 
   /// Return the internal map
@@ -43,11 +43,13 @@ class BinaryMapFile {
   /// Ensure initialize before using
   Future<void> ensureInitialized() async {
     _map.clear();
+    _file = File(path);
 
     try {
-      if (_file.existsSync()) {
+      if (_file!.existsSync()) {
+        final path = _file!.path;
         final stopwatch = Stopwatch()..start();
-        final bytes = await _file.readAsBytes();
+        final bytes = await _file!.readAsBytes();
         if (bytes.isNotEmpty) {
           final encodeMap = Map<String, dynamic>.from(_codec.decodeMessage(
                   bytes.buffer.asByteData(0, bytes.lengthInBytes))
@@ -118,7 +120,8 @@ class BinaryMapFile {
         throw Exception("Failed to serialize map. Empty data");
       } else {
         final bytes = byteData.buffer.asUint8List(0, byteData.lengthInBytes);
-        await _file.writeAsBytes(bytes);
+        _file ??= File(path!);
+        await _file!.writeAsBytes(bytes);
         debugPrint(
             "Serialize `$path` takes ${stopwatch.elapsed.inMilliseconds}ms");
       }
@@ -128,11 +131,10 @@ class BinaryMapFile {
     }
   }
 
-  @visibleForTesting
-
   /// Hash the key before lookup or serialize, works only if `secured` is set to true
   ///
   /// * `key` key to hash
+  @visibleForTesting
   String hashKey(String key) =>
       secured ? md5.convert(utf8.encode(key)).toString() : key;
 }

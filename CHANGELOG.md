@@ -26,3 +26,8 @@
 
 * Release stable and update documentation
 
+## 1.1.0
+
+* BREAKING CHANGE: create file from path instead using file
+* New created file (if not existed) is only in memory until calling `serialize`
+

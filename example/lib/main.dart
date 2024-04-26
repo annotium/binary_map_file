@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final Directory appDocumentsDir = await getApplicationDocumentsDirectory();
     final filePath = path.join(appDocumentsDir.path, 'file.dat');
 
-    binaryMapFile = BinaryMapFile(File(filePath));
+    binaryMapFile = BinaryMapFile(path: filePath);
     await binaryMapFile.ensureInitialized();
     initNotifier.value = true;
 
