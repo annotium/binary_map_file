@@ -3,15 +3,8 @@
 import 'dart:io';
 
 import 'package:binary_map_file/binary_map_file.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:path/path.dart' as fs_path;
-
-// Create mocks
-class MockFile extends Mock implements File {}
-
-class MockQMessageCodec extends Mock implements StandardMessageCodec {}
 
 void main() {
   group('BinaryMapFile', () {

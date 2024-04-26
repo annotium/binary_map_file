@@ -26,7 +26,6 @@ class BinaryMapFile {
   final StandardMessageCodec _codec;
   final Map<String, dynamic> _map;
   final String path;
-  File? _file;
 
   /// Creates a [BinaryMapFile] in memory. It will be serialized to file later
   /// when calling [serialize]
@@ -43,13 +42,12 @@ class BinaryMapFile {
   /// Ensure initialize before using
   Future<void> ensureInitialized() async {
     _map.clear();
-    _file = File(path);
 
     try {
-      if (_file!.existsSync()) {
-        final path = _file!.path;
+      final file = File(path);
+      if (file.existsSync()) {
         final stopwatch = Stopwatch()..start();
-        final bytes = await _file!.readAsBytes();
+        final bytes = await file.readAsBytes();
         if (bytes.isNotEmpty) {
           final encodeMap = Map<String, dynamic>.from(_codec.decodeMessage(
                   bytes.buffer.asByteData(0, bytes.lengthInBytes))
@@ -120,8 +118,8 @@ class BinaryMapFile {
         throw Exception("Failed to serialize map. Empty data");
       } else {
         final bytes = byteData.buffer.asUint8List(0, byteData.lengthInBytes);
-        _file ??= File(path!);
-        await _file!.writeAsBytes(bytes);
+        final file = File(path);
+        await file.writeAsBytes(bytes);
         debugPrint(
             "Serialize `$path` takes ${stopwatch.elapsed.inMilliseconds}ms");
       }

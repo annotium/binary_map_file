@@ -31,3 +31,5 @@
 * BREAKING CHANGE: create file from path instead using file
 * New created file (if not existed) is only in memory until calling `serialize`
 
+## 1.1.1
+* Refactoring, update lint
