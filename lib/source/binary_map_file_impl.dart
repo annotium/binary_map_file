@@ -27,9 +27,10 @@ class BinaryMapFile {
   final Map<String, dynamic> _map;
   final String path;
 
-  /// Creates a [BinaryMapFile] in memory. It will be serialized to file later
-  /// when calling [serialize]
+  /// Creates a [BinaryMapFile]. If file does not exist, it will be in memory
+  /// only until [serialize] is called
   ///
+  /// * `path` path to file, maybe load existed file or create a new file
   /// * `secured` secure serialization or not, default is `false`
   BinaryMapFile({required this.path, this.secured = false})
       : assert(path.isNotEmpty, "Input path must be a valid file path"),

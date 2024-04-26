@@ -33,3 +33,6 @@
 
 ## 1.1.1
 * Refactoring, update lint
+
+## 1.1.2
+* Update doc
