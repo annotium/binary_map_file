@@ -36,3 +36,6 @@
 
 ## 1.1.2
 * Update doc
+
+## 1.1.3
+* Bug fix

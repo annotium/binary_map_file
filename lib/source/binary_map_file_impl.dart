@@ -33,9 +33,10 @@ class BinaryMapFile {
   /// * `path` path to file, maybe load existed file or create a new file
   /// * `secured` secure serialization or not, default is `false`
   BinaryMapFile({required this.path, this.secured = false})
-      : assert(path.isNotEmpty, "Input path must be a valid file path"),
-        _codec = const StandardMessageCodec(),
-        _map = {};
+      : _codec = const StandardMessageCodec(),
+        _map = {} {
+    assert(path.isNotEmpty, "Input path must be a valid file path");
+  }
 
   /// Return the internal map
   Map<String, dynamic> get map => _map;
