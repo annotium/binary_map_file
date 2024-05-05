@@ -26,6 +26,7 @@ class BinaryMapFile {
   final StandardMessageCodec _codec;
   final Map<String, dynamic> _map;
   final String path;
+  bool saved;
 
   /// Creates a [BinaryMapFile]. If file does not exist, it will be in memory
   /// only until [serialize] is called
@@ -34,7 +35,8 @@ class BinaryMapFile {
   /// * `secured` secure serialization or not, default is `false`
   BinaryMapFile({required this.path, this.secured = false})
       : _codec = const StandardMessageCodec(),
-        _map = {} {
+        _map = {},
+        saved = false {
     assert(path.isNotEmpty, "Input path must be a valid file path");
   }
 
@@ -48,6 +50,7 @@ class BinaryMapFile {
     try {
       final file = File(path);
       if (file.existsSync()) {
+        saved = true;
         final stopwatch = Stopwatch()..start();
         final bytes = await file.readAsBytes();
         if (bytes.isNotEmpty) {
@@ -107,6 +110,8 @@ class BinaryMapFile {
     final rawKey = hashKey(key);
 
     _map[rawKey] = value;
+
+    saved = false;
   }
 
   /// Save data to file
@@ -122,6 +127,7 @@ class BinaryMapFile {
         final bytes = byteData.buffer.asUint8List(0, byteData.lengthInBytes);
         final file = File(path);
         await file.writeAsBytes(bytes);
+        saved = true;
         debugPrint(
             "Serialize `$path` takes ${stopwatch.elapsed.inMilliseconds}ms");
       }

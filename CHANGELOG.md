@@ -39,3 +39,6 @@
 
 ## 1.1.3
 * Bug fix
+
+## 1.1.4
+* Check `saved` flag to see the file is saved or not.
