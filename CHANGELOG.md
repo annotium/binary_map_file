@@ -42,3 +42,6 @@
 
 ## 1.1.4
 * Check `saved` flag to see the file is saved or not.
+
+## 1.1.5
+* Add `existed` flag to check the file existed.

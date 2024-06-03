@@ -43,6 +43,8 @@ class BinaryMapFile {
   /// Return the internal map
   Map<String, dynamic> get map => _map;
 
+  bool get existed => File(path).existsSync();
+
   /// Ensure initialize before using
   Future<void> ensureInitialized() async {
     _map.clear();
