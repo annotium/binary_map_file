@@ -45,3 +45,6 @@
 
 ## 1.1.5
 * Add `existed` flag to check the file existed.
+
+## 1.2.0
+* Using isolate.
