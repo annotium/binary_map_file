@@ -154,6 +154,12 @@ class BinaryMapFile implements IBinaryMapFile {
     saved = false;
   }
 
+  /// Remove map entry with key
+  ///
+  /// * `key` key to remove
+  @override
+  void remove(String key) => _map.remove(key);
+
   /// Serialize file
   @override
   Future<void> serialize() async {

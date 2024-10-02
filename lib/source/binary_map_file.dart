@@ -34,6 +34,11 @@ abstract interface class IBinaryMapFile {
   /// * `value` value to set
   void setValue<T extends Object>(String key, T? value);
 
+  /// Remove map entry with key
+  ///
+  /// * `key` key to remove
+  void remove(String key);
+
   /// Serialize file
   Future<void> serialize();
 }
