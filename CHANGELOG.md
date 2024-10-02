@@ -48,3 +48,6 @@
 
 ## 1.2.0
 * Using isolate.
+
+## 1.3.0
+* Add `remove` to remove entry in map.
