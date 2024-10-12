@@ -2,6 +2,6 @@
 
 part of "../binary_map_file.dart";
 
-abstract interface class IMapable {
+abstract interface class IEncodable {
   Map<dynamic, dynamic> toMap();
 }

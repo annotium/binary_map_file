@@ -58,3 +58,6 @@
 
 ## 1.5.0
 * Support util class `MapFileHandle`
+
+## 1.6.0
+* Refactor `IEncodable`

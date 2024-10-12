@@ -2,7 +2,7 @@
 
 part of "../binary_map_file.dart";
 
-abstract class BaseMapFileHandle<T extends IMapable> {
+abstract class BaseMapFileHandle<T extends IEncodable> {
   bool _initialized = false;
 
   final IBinaryMapFile _mapFile;
