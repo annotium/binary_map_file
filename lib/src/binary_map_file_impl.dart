@@ -173,6 +173,5 @@ class BinaryMapFile implements IBinaryMapFile {
   ///
   /// * `key` key to hash
   @visibleForTesting
-  String hashKey(String key) =>
-      secured ? md5.convert(utf8.encode(key)).toString() : key;
+  String hashKey(String key) => secured ? CryptoHash.md5(key) : key;
 }

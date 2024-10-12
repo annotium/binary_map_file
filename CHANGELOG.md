@@ -51,3 +51,7 @@
 
 ## 1.3.0
 * Add `remove` to remove entry in map.
+
+## 1.4.0
+* Export crypto `md5`
+* Remove flutter version
