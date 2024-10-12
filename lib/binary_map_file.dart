@@ -7,7 +7,8 @@ import "dart:isolate";
 
 import "package:flutter/foundation.dart";
 import "package:flutter/services.dart";
-import "package:crypto/crypto.dart";
+import "package:crypto/crypto.dart" as crypto;
 
-part "source/binary_map_file.dart";
-part "source/binary_map_file_impl.dart";
+part "src/binary_map_file.dart";
+part "src/binary_map_file_impl.dart";
+part "src/crypto_hash.dart";
