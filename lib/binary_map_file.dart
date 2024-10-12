@@ -12,3 +12,5 @@ import "package:crypto/crypto.dart" as crypto;
 part "src/binary_map_file.dart";
 part "src/binary_map_file_impl.dart";
 part "src/crypto_hash.dart";
+part "src/mapable.dart";
+part "src/map_file_handle.dart";
