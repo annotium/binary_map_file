@@ -55,3 +55,6 @@
 ## 1.4.0
 * Export crypto `md5`
 * Remove flutter version
+
+## 1.5.0
+* Support util class `MapFileHandle`
