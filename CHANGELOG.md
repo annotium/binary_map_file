@@ -61,3 +61,6 @@
 
 ## 1.6.0
 * Refactor `IEncodable`
+
+## 1.6.1
+* Fix `BaseMapFileHandle` serialize
