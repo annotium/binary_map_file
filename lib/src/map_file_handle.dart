@@ -27,15 +27,18 @@ abstract class BaseMapFileHandle<T extends IEncodable> {
 
   T? getValue(String key) => map[key];
 
-  void setValue(String key, T? value) {
-    map[key] = value;
-
-    _mapFile.map[key] = value?.toMap();
-  }
+  void setValue(String key, T? value) => map[key] = value;
 
   void remove(String key) => map.remove(key);
 
   T decode(Map map);
 
-  void serialize() => _mapFile.serialize();
+  void serialize() {
+    _mapFile.map.clear();
+    for (final entry in map.entries) {
+      _mapFile.map[entry.key] = entry.value?.toMap();
+    }
+
+    _mapFile.serialize();
+  }
 }
