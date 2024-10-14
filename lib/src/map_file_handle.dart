@@ -2,11 +2,11 @@
 
 part of "../binary_map_file.dart";
 
-abstract class BaseMapFileHandle<T extends IEncodable> {
+abstract class BaseMapFileHandle {
   bool _initialized = false;
 
   final IBinaryMapFile _mapFile;
-  final Map<String, T?> map;
+  final Map<String, dynamic> map;
 
   BaseMapFileHandle(this._mapFile) : map = {};
 
@@ -25,18 +25,29 @@ abstract class BaseMapFileHandle<T extends IEncodable> {
     _initialized = true;
   }
 
-  T? getValue(String key) => map[key];
+  T? getValue<T extends Object>(String key) => map[key];
 
-  void setValue(String key, T? value) => map[key] = value;
+  void setValue<T extends Object>(String key, T? value) {
+    map[key] = value;
+  }
 
   void remove(String key) => map.remove(key);
 
-  T decode(Map map);
+  T decode<T extends Object>(Map map);
 
   void serialize() {
     _mapFile.map.clear();
     for (final entry in map.entries) {
-      _mapFile.map[entry.key] = entry.value?.toMap();
+      final type = entry.value.runtimeType;
+
+      if (type is int || type is double || type is num || type is String) {
+        _mapFile.map[entry.key] = entry.value;
+      } else if (type is IEncodable) {
+        _mapFile.map[entry.key] = entry.value?.toMap();
+      } else {
+        throw UnsupportedError(
+            'Unsupported type $type. Please use primitive type or IEncodable');
+      }
     }
 
     _mapFile.serialize();
