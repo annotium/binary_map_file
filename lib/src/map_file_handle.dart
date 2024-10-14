@@ -6,7 +6,7 @@ abstract class BaseMapFileHandle<T extends IEncodable> {
   bool _initialized = false;
 
   final IBinaryMapFile _mapFile;
-  final Map map;
+  final Map<String, T?> map;
 
   BaseMapFileHandle(this._mapFile) : map = {};
 

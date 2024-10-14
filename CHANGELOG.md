@@ -73,3 +73,6 @@
 
 ## 1.6.4
 * `BaseMapFileHandle` bug fix
+
+## 1.6.5
+* `BaseMapFileHandle` bug fix
