@@ -64,3 +64,6 @@
 
 ## 1.6.1
 * Fix `BaseMapFileHandle` serialize
+
+## 1.6.2
+* Check support `BaseMapFileHandle` for all primitive tyoe or `IEncodable` 
