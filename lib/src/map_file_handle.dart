@@ -15,7 +15,7 @@ abstract class BaseMapFileHandle {
       return;
     }
 
-    _mapFile.ensureInitialized();
+    await _mapFile.ensureInitialized();
     map.clear();
 
     for (final entry in _mapFile.map.entries) {
@@ -35,7 +35,7 @@ abstract class BaseMapFileHandle {
 
   T decode<T extends Object>(Map map);
 
-  void serialize() {
+  Future<void> serialize() async {
     _mapFile.map.clear();
     for (final entry in map.entries) {
       final type = entry.value.runtimeType;
@@ -50,6 +50,6 @@ abstract class BaseMapFileHandle {
       }
     }
 
-    _mapFile.serialize();
+    await _mapFile.serialize();
   }
 }

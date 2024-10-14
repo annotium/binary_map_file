@@ -67,3 +67,6 @@
 
 ## 1.6.2
 * Check support `BaseMapFileHandle` for all primitive tyoe or `IEncodable` 
+
+## 1.6.3
+* `BaseMapFileHandle` bug fix
