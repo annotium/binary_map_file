@@ -76,3 +76,6 @@
 
 ## 1.6.5
 * `BaseMapFileHandle` bug fix
+
+## 1.7.0
+* Refactoring and bug fix

@@ -6,6 +6,8 @@ typedef BackgroundArgumentType = (String, Map);
 
 @pragma('vm:entry-point')
 Map? loadInBackground(String path) {
+  debugPrint("Load file `$path`");
+
   final file = File(path);
   final bytes = file.readAsBytesSync();
   return bytes.isEmpty
@@ -18,6 +20,8 @@ Map? loadInBackground(String path) {
 @pragma('vm:entry-point')
 void saveInBackground((String, Map) data) {
   final (path, map) = data;
+  debugPrint("Save file `$path`");
+
   try {
     final byteData = const StandardMessageCodec().encodeMessage(map);
     if (byteData == null) {
@@ -25,7 +29,7 @@ void saveInBackground((String, Map) data) {
     } else {
       final bytes = byteData.buffer.asUint8List(0, byteData.lengthInBytes);
       final file = File(path);
-      file.writeAsBytesSync(bytes);
+      file.writeAsBytesSync(bytes, flush: true);
     }
   } catch (error, stackTrace) {
     log(error.toString(), stackTrace: stackTrace);
@@ -45,7 +49,6 @@ void saveInBackground((String, Map) data) {
 ///  * [List]s of supported values
 ///  * [Map]s from supported values to supported values
 class BinaryMapFile implements IBinaryMapFile {
-  final rootIsolateToken = RootIsolateToken.instance!;
   final bool secured;
   final Map<String, dynamic> _map;
   final String path;
@@ -82,21 +85,15 @@ class BinaryMapFile implements IBinaryMapFile {
         saved = true;
         final stopwatch = Stopwatch()..start();
 
-        // final bytes = await file.readAsBytes();
-        // if (bytes.isNotEmpty) {
-        //   final encodeMap = Map<String, dynamic>.from(
-        //       const StandardMessageCodec().decodeMessage(
-        //     bytes.buffer.asByteData(0, bytes.lengthInBytes),
-        //   ) as Map<Object?, Object?>);
-        //   map.addAll(encodeMap);
-        // }
-
-        final map = await compute<String, Map?>(loadInBackground, path);
+        final map = await compute(loadInBackground, path);
         if (map != null) {
-          _map.addAll(Map<String, dynamic>.from(map));
+          _map.addAll(map.cast<String, dynamic>());
         }
+
         debugPrint(
             "Deserialize `$path` takes ${stopwatch.elapsed.inMilliseconds}ms");
+      } else {
+        debugPrint("File not found `$path`");
       }
     } on Exception catch (ex) {
       log(ex.toString());
@@ -107,15 +104,10 @@ class BinaryMapFile implements IBinaryMapFile {
   ///
   /// * `key` key to lookup
   @override
-  T? getValue<T extends Object>(String key) {
+  T getValue<T extends dynamic>(String key) {
     final rawKey = hashKey(key);
 
-    final value = _map[rawKey];
-    if (value is T?) {
-      return value;
-    }
-
-    return null;
+    return _map[rawKey];
   }
 
   /// Check if key is set
@@ -129,7 +121,7 @@ class BinaryMapFile implements IBinaryMapFile {
   /// * `key` key to lookup,
   /// * `defaultValue` default value to set if map contains no such `key`
   @override
-  T? getDefaultValue<T extends Object>(String key, [T? defaultValue]) {
+  T? getDefaultValue<T extends dynamic>(String key, [T? defaultValue]) {
     final rawKey = hashKey(key);
 
     if (!containsKey(rawKey)) {
@@ -138,7 +130,7 @@ class BinaryMapFile implements IBinaryMapFile {
       return defaultValue;
     }
 
-    return _map[rawKey];
+    return _map[rawKey] ?? defaultValue;
   }
 
   /// Set value for key
@@ -146,7 +138,7 @@ class BinaryMapFile implements IBinaryMapFile {
   /// * `key` key to lookup,
   /// * `value` value to set
   @override
-  void setValue<T extends Object>(String key, T? value) {
+  void setValue<T extends dynamic>(String key, T value) {
     final rawKey = hashKey(key);
 
     _map[rawKey] = value;
@@ -165,7 +157,7 @@ class BinaryMapFile implements IBinaryMapFile {
   Future<void> serialize() async {
     debugPrint("Serialize file `$path`");
     final stopwatch = Stopwatch()..start();
-    await Isolate.spawn<(String, Map)>(saveInBackground, (path, _map));
+    await compute(saveInBackground, (path, _map));
     debugPrint("Serialize `$path` takes ${stopwatch.elapsed.inMilliseconds}ms");
   }
 

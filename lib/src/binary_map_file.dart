@@ -4,7 +4,7 @@ part of "../binary_map_file.dart";
 
 abstract interface class IBinaryMapFile {
   /// Return the internal map
-  Map get map;
+  Map<String, dynamic> get map;
 
   /// Check if file existed
   bool get existed;
@@ -20,19 +20,19 @@ abstract interface class IBinaryMapFile {
   /// Get value for given key
   ///
   /// * `key` key to lookup
-  T? getValue<T extends Object>(String key);
+  T getValue<T extends dynamic>(String key);
 
   /// Get value for given key, if key is not set, set default value
   ///
   /// * `key` key to lookup,
   /// * `defaultValue` default value to set if map contains no such `key`
-  T? getDefaultValue<T extends Object>(String key, [T? defaultValue]);
+  T? getDefaultValue<T extends dynamic>(String key, [T? defaultValue]);
 
   /// Set value for key
   ///
   /// * `key` key to lookup,
   /// * `value` value to set
-  void setValue<T extends Object>(String key, T? value);
+  void setValue<T extends dynamic>(String key, T value);
 
   /// Remove map entry with key
   ///

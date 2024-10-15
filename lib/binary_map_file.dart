@@ -3,7 +3,6 @@
 import "dart:convert";
 import "dart:developer";
 import "dart:io";
-import "dart:isolate";
 
 import "package:flutter/foundation.dart";
 import "package:flutter/services.dart";
@@ -13,4 +12,3 @@ part "src/binary_map_file.dart";
 part "src/binary_map_file_impl.dart";
 part "src/crypto_hash.dart";
 part "src/encodable.dart";
-part "src/map_file_handle.dart";
