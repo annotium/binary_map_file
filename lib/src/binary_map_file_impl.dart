@@ -110,6 +110,20 @@ class BinaryMapFile implements IBinaryMapFile {
     return _map[rawKey];
   }
 
+  /// Get list of value for given key
+  ///
+  /// * `key` key to lookup
+  @override
+  List<T>? getList<T extends dynamic>(String key) {
+    final value = map[key];
+
+    if (value == null) {
+      return null;
+    }
+
+    return value is List ? null : List<T>.from(value);
+  }
+
   /// Check if key is set
   ///
   /// * `key` key to lookup
