@@ -22,6 +22,11 @@ abstract interface class IBinaryMapFile {
   /// * `key` key to lookup
   T getValue<T extends dynamic>(String key);
 
+  /// Get value for given key
+  ///
+  /// * `key` key to lookup
+  List<T>? getList<T extends dynamic>(String key);
+
   /// Get value for given key, if key is not set, set default value
   ///
   /// * `key` key to lookup,

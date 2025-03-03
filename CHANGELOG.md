@@ -1,81 +1,101 @@
 ## 0.0.1
 
-* Initialize version
+- Initialize version
 
 ## 0.0.2
 
-* Update readme.md
+- Update readme.md
 
 ## 0.0.3
 
-* Update changelog.md
+- Update changelog.md
 
 ## 0.0.4
 
-* Refactoring/bug fix
+- Refactoring/bug fix
 
 ## 0.0.5
 
-* Refactoring
+- Refactoring
 
 ## 0.0.6
 
-* Update example and documentation
+- Update example and documentation
 
 ## 1.0.0
 
-* Release stable and update documentation
+- Release stable and update documentation
 
 ## 1.1.0
 
-* BREAKING CHANGE: create file from path instead using file
-* New created file (if not existed) is only in memory until calling `serialize`
+- BREAKING CHANGE: create file from path instead using file
+- New created file (if not existed) is only in memory until calling `serialize`
 
 ## 1.1.1
-* Refactoring, update lint
+
+- Refactoring, update lint
 
 ## 1.1.2
-* Update doc
+
+- Update doc
 
 ## 1.1.3
-* Bug fix
+
+- Bug fix
 
 ## 1.1.4
-* Check `saved` flag to see the file is saved or not.
+
+- Check `saved` flag to see the file is saved or not.
 
 ## 1.1.5
-* Add `existed` flag to check the file existed.
+
+- Add `existed` flag to check the file existed.
 
 ## 1.2.0
-* Using isolate.
+
+- Using isolate.
 
 ## 1.3.0
-* Add `remove` to remove entry in map.
+
+- Add `remove` to remove entry in map.
 
 ## 1.4.0
-* Export crypto `md5`
-* Remove flutter version
+
+- Export crypto `md5`
+- Remove flutter version
 
 ## 1.5.0
-* Support util class `MapFileHandle`
+
+- Support util class `MapFileHandle`
 
 ## 1.6.0
-* Refactor `IEncodable`
+
+- Refactor `IEncodable`
 
 ## 1.6.1
-* Fix `BaseMapFileHandle` serialize
+
+- Fix `BaseMapFileHandle` serialize
 
 ## 1.6.2
-* Check support `BaseMapFileHandle` for all primitive tyoe or `IEncodable` 
+
+- Check support `BaseMapFileHandle` for all primitive tyoe or `IEncodable`
 
 ## 1.6.3
-* `BaseMapFileHandle` bug fix
+
+- `BaseMapFileHandle` bug fix
 
 ## 1.6.4
-* `BaseMapFileHandle` bug fix
+
+- `BaseMapFileHandle` bug fix
 
 ## 1.6.5
-* `BaseMapFileHandle` bug fix
+
+- `BaseMapFileHandle` bug fix
 
 ## 1.7.0
-* Refactoring and bug fix
+
+- Refactoring and bug fix
+
+## 1.8.0
+
+- Read list
